@@ -1,0 +1,15 @@
+0 Admin
+1 BoxSelect_Call
+2 BoxSelect_Request
+3 BoxSelect_Task
+4 Box_Call
+5 CallTemplate
+6 CMDBItems
+7 Designer
+8 MenuButton
+9 Nothing
+10 Box_Request
+11 Search
+12 SysAdmin
+13 Box_Task
+14 WorkflowTemplate
