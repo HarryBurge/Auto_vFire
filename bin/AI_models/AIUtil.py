@@ -1,5 +1,11 @@
-import tensorflow.keras
+__Authour__ = 'Harry Burge'
+__DateCreated__ = '01/02/2020'
+__LastUpdated__ = '04/02/2020'
+
+
+# Imports
 from PIL import Image, ImageOps
+import tensorflow.keras
 import numpy as np
 
 class AIModel:
