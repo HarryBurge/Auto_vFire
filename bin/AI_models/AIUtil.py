@@ -8,6 +8,7 @@ from PIL import Image, ImageOps
 import tensorflow.keras
 import numpy as np
 
+
 class AIModel:
     '''
     This is a class that holds an interface to using tensorflow for modeling images.

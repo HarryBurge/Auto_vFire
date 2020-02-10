@@ -8,11 +8,13 @@ __Authour__ = 'Harry Burge'
 __DateCreated__ = '04/02/2020'
 __LastUpdated__ = '04/02/2020'
 
+
 # Imports
 from bin.insturctor import compiler
 import sys
 
-def main_compile(path):
+
+def __main_compile(path):
 
     file = open(path, 'r')
     lines = file.read().split('\n')
@@ -33,7 +35,7 @@ def main(args):
 
         if args[0] in ['-c','-C','--compile','--Compile'] and len(args)==2:
             if args[1].split('.')[-1] == 'txt':
-                main_compile(args[1])
+                __main_compile(args[1])
             else:
                 raise RuntimeError('The file to be compiled isn\'t a text file')
 

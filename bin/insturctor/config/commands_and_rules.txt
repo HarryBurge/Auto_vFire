@@ -1,0 +1,22 @@
+@ButtonRules
+*Designer, 4
+*Test, 3
+	Find a screen, 1
+	View screens, 1
+	Skins, 1
+*Admin, 2
+*Sysadmin, 2
+	*Test, 4
+*Workflow template, 2
+*Call template, 2
+*CMDB items, 2
+*Search, 2
+*Close_vfire, 2
+
+@CustomCommands
+test_custom
+	Designer
+	Admin
+	Sysadmin
+another_custom
+	Admin
