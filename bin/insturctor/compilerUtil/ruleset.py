@@ -42,8 +42,8 @@ class RuleSet:
             if line != '' and line.find('#') == -1: temp.append(line)
 
         # Initilise the ruleset
-        self.buttonRules = self._get_button_rules(copy.copy(temp))
-        self.customCommands = self._get_custom_commands(copy.copy(temp))
+        self.buttonRules = self._init_button_rules(copy.copy(temp))
+        self.customCommands = self._init_custom_commands(copy.copy(temp))
 
 
     def __str__(self):
@@ -56,13 +56,16 @@ class RuleSet:
             str : the string of things
         '''
         tempbuttons = ''
-        for i in self.buttonRules:
-            tempbuttons += '\n' + str(i)
+
+        temp = self.buttonRules.locals + self.buttonRules.globals
+
+        for i in temp:
+            tempbuttons += str(i)
 
         return 'Custom Commands:-\n' + str(self.customCommands) + '\n\nButton Rules:-' + tempbuttons
 
 
-    def _get_button_rules(self, lines):
+    def _init_button_rules(self, lines):
         '''
         Takes the lines passed from the file and puts them into a datastructure which
         holds the infomation which will be used, to test the actual compilation.
@@ -91,12 +94,20 @@ class RuleSet:
         # Global = *, Local = -
 
         # Put lines into form specifyed
-        rules = Util.recursive_read(lines)
+        temp = Util.recursive_read(lines)
+        rules = Util._button('VFire', 0)
+
+        for i in temp:
+            if i.name.count('*') != 0:
+                rules.addGlobal(i)
+            else:
+                rules.addLocal(i)
+        
 
         return rules
 
     
-    def _get_custom_commands(self, lines):
+    def _init_custom_commands(self, lines):
         '''
         Takes lines passed, finds if it has customcommands section, then creates
         a dictonary of the commands.

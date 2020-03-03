@@ -1,9 +1,13 @@
 @ButtonRules
 *Designer, 4
-*Test, 3
 	Find a screen, 1
 	View screens, 1
 	Skins, 1
+*Test, 3
+	*Test1, 1
+	Test2, 1
+		*Test2.1, 1
+		Test2.2, 1
 *Admin, 2
 *Sysadmin, 2
 	*Test, 4

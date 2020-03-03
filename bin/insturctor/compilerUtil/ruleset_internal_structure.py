@@ -33,6 +33,7 @@ def index_of_next_same_level(lines, tablevel):
 
         if line.count('\t') == tablevel:
             return index
+    return None
 
 
 def recursive_read(lines):
@@ -63,13 +64,20 @@ def recursive_read(lines):
         if index == 0:
 
             # Return empty button
-            temp = [button]
+            return [button] + recursive_read(lines[index+1:])
 
-            # Carry on the function
-            for i in recursive_read(lines[index+1:]):
-                temp.append(i)
+        elif index == None:
 
-            return temp
+            # Add onto button the buttons that inherit from it
+            for i in recursive_read(lines[1:]):
+
+                # Add to whether global or local
+                if i.name.count('*') != 0:
+                    button.addGlobal(i)
+                else:
+                    button.addLocal(i)
+
+            return [button]
 
         else:
 
@@ -82,13 +90,7 @@ def recursive_read(lines):
                 else:
                     button.addLocal(i)
 
-            temp = [button]
-
-            # Carry on the function
-            for i in recursive_read(lines[index+1:]):
-                temp.append(i)
-
-            return temp
+            return [button] + recursive_read(lines[index+1:])
 
 
 class _button:
@@ -138,13 +140,20 @@ class _button:
         # Converts them to a string
         globalsstr = ''
         for i in tempglobals:
-            globalsstr += i + '\n'
+            globalsstr += i
 
         localsstr = ''
         for i in templocals:
-            localsstr += i + '\n'
+            localsstr += i
 
-        return '\nName: ' + self.name + '\nGlobals: {' + globalsstr + '}\nLocals: {' + localsstr + '}'
+        temp = 'Name: ' + self.name + ' '
+
+        if globalsstr != '':
+            temp += 'Globals: {' + globalsstr + '} '
+        if localsstr != '':
+            temp += 'Locals: {' + localsstr + '} '
+
+        return temp
 
 
     def addLocal(self, button):
@@ -169,3 +178,8 @@ class _button:
             None
         '''
         self.globals.append(button)
+
+    
+    def getName(self):
+        return self.name.replace('*', '')
+        

@@ -14,17 +14,23 @@ from bin.insturctor import compiler
 import sys
 
 
-def __main_compile(path):
+def __main_compile(args):
+
+    path = args[0]
 
     file = open(path, 'r')
     lines = file.read().split('\n')
     file.close()
+
     if lines[-1] == '':
         del lines[-1]
     if len(lines) == 0:
         raise RuntimeError('File to compile is empty')
 
-    compiler.compile(lines)
+    if len(args) == 2:
+        compiler.compile(lines, args[1])
+    else:
+        compiler.compile(lines)
 
 
 def main(args):
@@ -33,9 +39,9 @@ def main(args):
     
     if len(args) != 0:
 
-        if args[0] in ['-c','-C','--compile','--Compile'] and len(args)==2:
+        if args[0] in ['-c','-C','--compile','--Compile'] and len(args) in [2,3]:
             if args[1].split('.')[-1] == 'txt':
-                __main_compile(args[1])
+                __main_compile(args[1:])
             else:
                 raise RuntimeError('The file to be compiled isn\'t a text file')
 
